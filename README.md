@@ -7,6 +7,13 @@ Minimal URL shortener in Python using Flask.
     pip install -r requirements.txt
     gunicorn app:app
 
+Or using Docker:
+
+```sh
+docker build -t url-shortener .
+docker run -p 8000:8000 url-shortener
+```
+
 ## Use
 
 ### Shorten a URL
