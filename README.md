@@ -14,6 +14,12 @@ docker build -t url-shortener .
 docker run -p 8000:8000 url-shortener
 ```
 
+Or using Docker Compose:
+
+```sh
+docker compose up
+```
+
 ## Use
 
 ### Shorten a URL
