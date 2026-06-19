@@ -51,8 +51,19 @@ def list_urls():
     urls = [{
         'short_url': request.host_url + code,
         'original_url': r.get(code),
-    } for code in sorted(codes)]
+        } for code in sorted(codes)]
     return jsonify(urls)
+
+@app.delete('/urls/<code>')
+def delete_url(code):
+    if not authenticate():
+        return 'authentication required', 401
+    user_key = f'user:{request.authorization.username}:urls'
+    if not r.sismember(user_key, code):
+        abort(404)
+    r.delete(code)
+    r.srem(user_key, code)
+    return '', 200
 
 @app.route('/r/<code>')
 def resolve(code):

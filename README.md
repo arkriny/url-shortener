@@ -33,3 +33,7 @@ Or using Docker Compose:
 ### List user's URLs
 
     curl http://user:secret@127.0.0.1:8000/urls
+
+### Delete URL by code
+
+    curl -X DELETE http://user:secret@127.0.0.1:8000/urls/BJePXN
