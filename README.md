@@ -24,8 +24,12 @@ Or using Docker Compose:
 
 ### Shorten a URL
 
-    curl -X POST --data "https://example.com" http://user:secret@127.0.0.1:8000/shorten
+    curl -X POST --data "https://example.com" http://user:secret@127.0.0.1:8000/urls
 
 ### Resolve
 
     curl --follow http://127.0.0.1:8000/r/BJePXN
+
+### List user's URLs
+
+    curl http://user:secret@127.0.0.1:8000/urls

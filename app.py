@@ -1,5 +1,5 @@
 import hashlib, string, random, os
-from flask import Flask, request, redirect, abort
+from flask import Flask, request, redirect, abort, jsonify
 import redis
 
 app = Flask(__name__)
@@ -31,8 +31,8 @@ def register():
     r.set(f'user:{username}', hash_password(password))
     return 'user created', 201
 
-@app.post('/shorten')
-def shorten():
+@app.post('/urls')
+def create_url():
     if not authenticate():
         return 'authentication required', 401
     url = request.get_data(as_text=True)
@@ -40,7 +40,19 @@ def shorten():
         return 'missing url', 400
     code = generate_code()
     r.set(code, url)
+    r.sadd(f'user:{request.authorization.username}:urls', code)
     return f'{request.host_url}r/{code}', 201
+
+@app.get('/urls')
+def list_urls():
+    if not authenticate():
+        return 'authentication required', 401
+    codes = r.smembers(f'user:{request.authorization.username}:urls')
+    urls = [{
+        'short_url': request.host_url + code,
+        'original_url': r.get(code),
+    } for code in sorted(codes)]
+    return jsonify(urls)
 
 @app.route('/r/<code>')
 def resolve(code):
