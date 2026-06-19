@@ -10,11 +10,17 @@ Minimal URL shortener in Python using Flask.
 Or using Docker:
 
     docker build -t url-shortener .
+
     docker run -p 8000:8000 url-shortener
 
 Or using Docker Compose:
 
     docker compose up
+
+Or using Docker Swarm:
+
+    docker swarm init
+    docker stack deploy -c compose.yaml url-shortener
 
 ## Use
 

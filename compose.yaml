@@ -1,6 +1,7 @@
 services:
   app:
     build: .
+    image: url-shortener
     ports:
       - "8000:8000"
     environment:
