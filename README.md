@@ -9,22 +9,22 @@ Minimal URL shortener in Python using Flask.
 
 Or using Docker:
 
-```sh
-docker build -t url-shortener .
-docker run -p 8000:8000 url-shortener
-```
+    docker build -t url-shortener .
+    docker run -p 8000:8000 url-shortener
 
 Or using Docker Compose:
 
-```sh
-docker compose up
-```
+    docker compose up
 
 ## Use
 
+### Register
+
+    curl -X POST --data 'username=user&password=secret' http://127.0.0.1:8000/register
+
 ### Shorten a URL
 
-    curl -X POST --data "https://example.com" http://127.0.0.1:8000/shorten
+    curl -X POST --data "https://example.com" http://user:secret@127.0.0.1:8000/shorten
 
 ### Resolve
 
