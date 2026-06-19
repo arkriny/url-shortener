@@ -34,6 +34,10 @@ Or using Docker Compose:
 
     curl http://user:secret@127.0.0.1:8000/urls
 
+### Update URL by code
+
+    curl -X PUT --data "https://newexample.com" http://user:secret@127.0.0.1:8000/urls/BJePXN
+
 ### Delete URL by code
 
     curl -X DELETE http://user:secret@127.0.0.1:8000/urls/BJePXN

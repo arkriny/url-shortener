@@ -54,6 +54,19 @@ def list_urls():
         } for code in sorted(codes)]
     return jsonify(urls)
 
+@app.put('/urls/<code>')
+def update_url(code):
+    if not authenticate():
+        return 'authentication required', 401
+    user_key = f'user:{request.authorization.username}:urls'
+    if not r.sismember(user_key, code):
+        abort(404)
+    url = request.get_data(as_text=True)
+    if not url:
+        return 'missing url', 400
+    r.set(code, url)
+    return request.host_url + code, 200
+
 @app.delete('/urls/<code>')
 def delete_url(code):
     if not authenticate():
