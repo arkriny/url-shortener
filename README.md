@@ -1,8 +1,10 @@
 # url-shortener
 
-Minimal URL shortener in Python using Flask.
+Minimal URL shortener in Python using Flask and Redis.
 
 ## Run
+
+Requires Redis instance at $REDIS_HOST (defaults to localhost).
 
     pip install -r requirements.txt
     gunicorn app:app
@@ -10,10 +12,12 @@ Minimal URL shortener in Python using Flask.
 Or using Docker:
 
     docker build -t url-shortener .
-
     docker run -p 8000:8000 url-shortener
 
-Or using Docker Compose:
+Alternatively, full service configuration is provided in compose.yaml file.
+Note that commands below require the 'url-shortener' image to exist locally.
+
+Run using Docker Compose:
 
     docker compose up
 
